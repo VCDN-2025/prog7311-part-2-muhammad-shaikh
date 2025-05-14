@@ -1,0 +1,77 @@
+﻿@model List<AgriEnergyConnect.Models.Product>
+@{
+    ViewBag.Title = "Farmer Dashboard";
+}
+
+<style>
+    body {
+        background: url('/images/farmpic2.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .dashboard-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .dashboard-card {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 800px;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-card">
+        <h2 class="mb-4 text-center">Welcome, Farmer!</h2>
+
+        <form method="post" asp-action="AddProduct" class="mb-4">
+            <div class="mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" name="name" id="name" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" name="category" id="category" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="productionDate" class="form-label">Production Date</label>
+                <input type="date" name="productionDate" id="productionDate" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-success">Add Product</button>
+        </form>
+
+        <h4>Your Products</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Production Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Category</td>
+                            <td>@item.ProductionDate.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
